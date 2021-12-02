@@ -66,13 +66,14 @@ public class SearchSolution {
     }
 
     public int minArray(int[] numbers) {
-        int prim = numbers[0];
-
+        int prim = 0;
+        if (numbers.length > 0) prim = numbers[0];
         for (int i = numbers.length -1; i >=0; i--){
-            if (numbers[i] < prim && numbers[i-1] > prim) return numbers[i];
+            System.out.println(numbers[i] + " "+ numbers[Math.max(i - 1, 0)]);
+            if (numbers[i] < numbers[Math.max(i - 1, 0)]) return numbers[i];
         }
 
-        return 0;
+        return prim;
     }
 
 }

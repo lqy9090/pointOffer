@@ -49,10 +49,11 @@ public class test {
     public static void main(String[] args) {
         /**
          * 测试用例：旋转1个元素 多个元素 n-1个元素
+         *          全部元素重复
          *         最小元素重复
-         *               不重复
+         *               不重复  其他重复
          */
-        int[] nums = {5,1,2,3,4};
+        int[] nums = {2};
         SearchSolution searchSolution = new SearchSolution();
         int number = searchSolution.minArray(nums);
         System.out.println(number);
