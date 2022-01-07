@@ -87,8 +87,17 @@ public class Test {
         System.out.println(count);
     }
 
+    public void minArrayBinaryTest() {
+        int[] nums = {1,1};
+        SearchSolution searchSolution = new SearchSolution();
+//        int min = searchSolution.minArrayBinary(nums);
+        int min = searchSolution.minArrayGuanfang(nums);
+        System.out.println(min);
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
-        test.searchRepeatCountTest();
+//        test.searchRepeatCountTest();
+        test.minArrayBinaryTest();
     }
 }

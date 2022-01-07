@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SearchSolution {
     public int findRepeatNumber(int[] nums) {
@@ -158,6 +156,90 @@ public class SearchSolution {
         }
 
         return findLastIndex(nums, k, left, right);
+    }
+
+    public int minArrayBinary(int[] numbers) {
+        int prim = numbers[0];
+        int min = binarySearchMin(numbers, 0, numbers.length - 1);
+        System.out.println("min: " + min);
+
+        if (min == -2) {
+            prim = minArray(numbers);
+        }else {
+            prim = min;
+        }
+
+        return prim;
+    }
+
+    public int binarySearchMin(int[] nums, int left, int right) {
+        System.out.print("binarySearchMin left: "+left+" right: "+right);
+        if (left > right) return -1;
+
+        int mid = (left + right) / 2;
+        System.out.println(" mid: "+mid+" nums[mid]: " + nums[mid]);
+        if (nums.length == 1 || (mid == 0 && nums[mid + 1] > nums[mid])
+                || (mid == nums.length - 1 && nums[mid - 1] > nums[mid])
+                || (nums[mid] < nums[mid - 1] && nums[mid] < nums[mid + 1])) {
+            return nums[mid];
+        }else if (nums[mid] == nums[mid - 1]  && nums[mid] == nums[mid + 1]){
+            return -2;
+        }
+
+        if (nums[mid] > nums[mid+1] ){
+            left = mid +1;
+        }
+
+        if (nums[mid] < nums[mid+1]) {
+            right = mid -1;
+        }
+
+        return binarySearchMin(nums, left, right);
+    }
+
+    public int minArrayGuanfang(int[] numbers) {
+        int low = 0;
+        int high = numbers.length - 1;
+        while (low < high) {
+            int pivot = low + (high - low) / 2;
+            if (numbers[pivot] < numbers[high]) {
+                high = pivot;
+            } else if (numbers[pivot] > numbers[high]) {
+                low = pivot + 1;
+            } else {
+                high -= 1;
+            }
+        }
+        return numbers[low];
+    }
+
+    public char firstUniqCharQueue(String s) {
+        Map<Character, Integer> position = new HashMap<Character, Integer>();
+        Queue<Pair> queue = new LinkedList<Pair>();
+        int n = s.length();
+        for (int i = 0; i < n; ++i) {
+            char ch = s.charAt(i);
+            if (!position.containsKey(ch)) {
+                position.put(ch, i);
+                queue.offer(new Pair(ch, i));
+            } else {
+                position.put(ch, -1);
+                while (!queue.isEmpty() && position.get(queue.peek().ch) == -1) {
+                    queue.poll();
+                }
+            }
+        }
+        return queue.isEmpty() ? ' ' : queue.poll().ch;
+    }
+
+    class Pair {
+        char ch;
+        int pos;
+
+        Pair(char ch, int pos) {
+            this.ch = ch;
+            this.pos = pos;
+        }
     }
 
 }
