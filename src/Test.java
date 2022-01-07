@@ -1,4 +1,4 @@
-public class test {
+public class Test {
 
 //    public static void main(String[] args) {
 //        StringSolution stringSolution = new StringSolution();
@@ -46,16 +46,49 @@ public class test {
 //        System.out.println(number);
 //    }
 
-    public static void main(String[] args) {
-        /**
-         * 测试用例：旋转1个元素 多个元素 n-1个元素
-         *          全部元素重复
-         *         最小元素重复
-         *               不重复  其他重复
+//    public static void main(String[] args) {
+//        /**
+//         * 测试用例：旋转1个元素 多个元素 n-1个元素
+//         *          全部元素重复
+//         *         最小元素重复
+//         *               不重复  其他重复
+//         */
+//        int[] nums = {2};
+//        SearchSolution searchSolution = new SearchSolution();
+//        int number = searchSolution.minArray(nums);
+//        System.out.println(number);
+//    }
+
+//    public static void main(String[] args) {
+//        /**
+//         * 测试用例
+//         *          空字符串
+//         *          一个字符
+//         *          非空 全部重复
+//         *              多个重复
+//         *              一个重复
+//         */
+//        String s = "ulgsjkl";
+//        SearchSolution searchSolution = new SearchSolution();
+//        char c = searchSolution.firstUniqChar(s);
+//        System.out.println(c);
+//    }
+
+    public void searchRepeatCountTest() {
+        /*
+        测试用例 1.中间重复 {5,7,7,8,8,10}、一次{1,2,3,8,9,11}{5,7,7,8,9,10}、0次{1,2,3,7,9,11}
+                2.第一个数在最前面重复{8,8,8,8,8,9}{8,8,8,8,8,8}、一次{8,9,9,9,9,11}、0次
+                3.最后一个数在数组最右边重复{1,8,8,8,8,8}{8,8,8,8,8,8}、一次{5,6,7,7,7,8}、0次
          */
-        int[] nums = {2};
+        int[] nums = {2,2};
+        int target = 2;
         SearchSolution searchSolution = new SearchSolution();
-        int number = searchSolution.minArray(nums);
-        System.out.println(number);
+        int count = searchSolution.searchRepeatCount(nums, target);
+        System.out.println(count);
+    }
+
+    public static void main(String[] args) {
+        Test test = new Test();
+        test.searchRepeatCountTest();
     }
 }

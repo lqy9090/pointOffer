@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class SearchSolution {
     public int findRepeatNumber(int[] nums) {
@@ -74,6 +76,88 @@ public class SearchSolution {
         }
 
         return prim;
+    }
+
+    public char firstUniqChar(String s) {
+        char[] chars = s.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char c : chars){
+            Integer num = map.get(c);
+            map.put(c, (num == null? 1: ++num));
+        }
+
+        for (char c : chars){
+            if (map.get(c) == 1) return c;
+        }
+
+
+        return ' ';
+    }
+
+    public int searchRepeatCount(int[] nums, int target) {
+        int len = nums.length;
+        if (len<=0) return 0;
+        int count = 0;
+
+        //二分查找第一个target的下标
+        int firstIndex = findFirstIndex(nums, target, 0, len-1);
+        System.out.println("firstIndex: " + firstIndex);
+        //二分查找最后一个target的下标
+        int lastIndex = findLastIndex(nums, target, 0, len-1);
+        System.out.println("lastIndex: " + lastIndex);
+
+        count = lastIndex - firstIndex +1;
+        System.out.println(count);
+
+        if (lastIndex == -1 && firstIndex == -1) {
+            count = 0;
+        }
+
+        return count;
+    }
+
+    public int findFirstIndex(int[] nums, int k, int left, int right) {
+         System.out.print("findFirstIndex left: " + left + " right: " + right);
+        if (left > right) return -1;
+        int mid = (right + left) / 2;
+         System.out.println(" mid: "+mid+" nums[mid]: " + nums[mid]);
+        if (nums[mid] == k){
+            if (mid == 0 || nums[mid - 1] < k){
+                return mid;
+            }
+        }
+        if (nums[mid] < k || (nums[mid]==k && nums[mid-1] < k)){
+            left = mid +1;
+        }
+        if (nums[mid] > k || (nums[mid]==k && nums[mid - 1] >= k)) {
+            right = mid -1;
+        }
+
+        return findFirstIndex(nums, k, left, right);
+    }
+
+    public int findLastIndex(int[] nums, int k, int left, int right) {
+         System.out.print("findLastIndex left: "+left+" right: "+right);
+        if (left > right) return -1;
+
+        int mid = (right + left) / 2;
+         System.out.println(" nums[mid]: " + nums[mid]);
+        if (nums[mid] == k){
+            if (mid == nums.length - 1 || nums[mid + 1] > k) {
+                return mid;
+            }
+        }
+//        if (nums[mid] <k || (nums[mid] ==k && nums[mid-1] <= k) ){ //{2,2}会失败
+        if (nums[mid] <k || (nums[mid] ==k && nums[mid+1] == k) ){
+            left = mid +1;
+        }
+//        if (nums[mid] > k || (nums[mid] ==k && nums[mid - 1] > k)) {
+        if (nums[mid] > k || (nums[mid] ==k && nums[mid+1]  < k)) {
+            right = mid -1;
+        }
+
+        return findLastIndex(nums, k, left, right);
     }
 
 }
