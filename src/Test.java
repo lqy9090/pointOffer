@@ -66,6 +66,40 @@ public class Test {
         SearchSolution searchSolution = new SearchSolution();
         int repeatNumber = searchSolution.findRepeatNumber(nums);
         System.out.println(repeatNumber);
+//    public static void main(String[] args) {
+//        /**
+//         * 测试用例
+//         *          空字符串
+//         *          一个字符
+//         *          非空 全部重复
+//         *              多个重复
+//         *              一个重复
+//         */
+//        String s = "ulgsjkl";
+//        SearchSolution searchSolution = new SearchSolution();
+//        char c = searchSolution.firstUniqChar(s);
+//        System.out.println(c);
+//    }
+
+    public void searchRepeatCountTest() {
+        /*
+        测试用例 1.中间重复 {5,7,7,8,8,10}、一次{1,2,3,8,9,11}{5,7,7,8,9,10}、0次{1,2,3,7,9,11}
+                2.第一个数在最前面重复{8,8,8,8,8,9}{8,8,8,8,8,8}、一次{8,9,9,9,9,11}、0次
+                3.最后一个数在数组最右边重复{1,8,8,8,8,8}{8,8,8,8,8,8}、一次{5,6,7,7,7,8}、0次
+         */
+        int[] nums = {2,2};
+        int target = 2;
+        SearchSolution searchSolution = new SearchSolution();
+        int count = searchSolution.searchRepeatCount(nums, target);
+        System.out.println(count);
+    }
+
+    public void minArrayBinaryTest() {
+        int[] nums = {1,1};
+        SearchSolution searchSolution = new SearchSolution();
+//        int min = searchSolution.minArrayBinary(nums);
+        int min = searchSolution.minArrayGuanfang(nums);
+        System.out.println(min);
     }
 
     public static void main(String[] args) {
@@ -73,5 +107,7 @@ public class Test {
 //        test.findRepeatNumberTest();  //03
 //        test.searchTest(); //53-1
         test.missingNumberTest(); //53-2
+//        test.searchRepeatCountTest();
+        test.minArrayBinaryTest();
     }
 }
