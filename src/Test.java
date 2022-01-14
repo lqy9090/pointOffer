@@ -59,13 +59,14 @@ public class Test {
 //        System.out.println(number);
 //    }
 
-    public void findRepeatNumberTest(){
+    public void findRepeatNumberTest() {
         int[] nums = {2, 3, 1, 0, 2, 5, 3};
 
 
         SearchSolution searchSolution = new SearchSolution();
         int repeatNumber = searchSolution.findRepeatNumber(nums);
         System.out.println(repeatNumber);
+    }
 //    public static void main(String[] args) {
 //        /**
 //         * 测试用例
