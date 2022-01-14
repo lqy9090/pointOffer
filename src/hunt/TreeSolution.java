@@ -197,7 +197,8 @@ public class TreeSolution {
         return recur(A.left, B.left) && recur(A.right, B.right);
     }
 
-    public TreeNode mirrorTree(TreeNode root) {
+    public TreeNode mirrorTree(TreeNode root) { //击败百分百 嘿嘿
+        if (root == null) return null;
         Queue<TreeNode> queue = new LinkedList<>(){{ add(root);}};
         List<List<TreeNode>> ans = new ArrayList<>();
 //        Queue<TreeNode> ans = new LinkedList<>();
@@ -205,30 +206,82 @@ public class TreeSolution {
             List<TreeNode> temp = new ArrayList<>();
             for (int i = queue.size(); i>0; i--){
                 TreeNode node = queue.poll();
-                TreeNode mirrorNode = new TreeNode(node.val);
+//                TreeNode mirrorNode = new TreeNode(node.val);
 //                ans.add(mirrorNode);
-                temp.add(mirrorNode);
-                if (node.right != null) queue.add(node.right);
-                if (node.left != null) queue.add(node.left);
+                temp.add(node==null?null:new TreeNode(node.val));
+                if (node != null){
+                    queue.add(node.right);
+//                if (node.left != null)
+                    queue.add(node.left);
+                }
+
             }
             ans.add(temp);
         }
+        System.out.println(ans.toString());
 
         TreeNode mirrorRoot = ans.get(0).get(0);
-        for (List<TreeNode> temp : ans) {
-
+//        TreeNode mirrorRoot =  ans.poll();
+//        recurBind(mirrorRoot, ans);
+        for (int i = 0; i < ans.size(); i++) {
+            List<TreeNode> nodeList = ans.get(i);
+//            System.out.println(nodeList.size());
+            int j = 0;
+            for (TreeNode node : nodeList) {
+                if(node == null) continue;
+                System.out.print("node.val: "+node.val+" i: "+i+" j: "+ j);
+                node.left = (i == ans.size() -1) ? null: ans.get(i + 1).get(j);
+                System.out.println(" j: "+ j);
+                node.right = (i == ans.size() -1) ? null: ans.get(i + 1).get(++j);
+                j++;
+            }
         }
-
 
         return mirrorRoot;
     }
 
-    public void recurBind(TreeNode root, Queue<TreeNode> subNode){
-        if (root == null) return;
-        root.left = subNode.poll();
-        root.right = subNode.poll();
-        recurBind(root.left, subNode);
-        recurBind(root.right, subNode);
+    public TreeNode mirrorTreeV2(TreeNode root) { //交换会将整棵子树交换
+        if (root == null) return null;
+        Queue<TreeNode> queue = new LinkedList<>() {{ add(root); }};
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.right != null) queue.add(node.right);
+            if (node.left != null) queue.add(node.left);
+            TreeNode tmp = node.left;
+            node.left = node.right;
+            node.right = tmp;
+        }
+        return root;
+    }
+
+    public TreeNode mirrorTreeV3(TreeNode root) { //递归法
+        if(root == null) return null;
+        TreeNode tmp = root.left;
+        root.left = mirrorTreeV3(root.right);
+        root.right = mirrorTreeV3(tmp);
+        return root;
+    }
+
+    public TreeNode isSymmetricV2(Boolean flag, TreeNode root) { //递归法
+        if(root == null) return null;
+        TreeNode tmp = root.left;
+        root.left = isSymmetricV2(flag, root.right);
+        root.right = isSymmetricV2(flag, tmp);
+        if (root.left != root.right) flag = false;
+        return root;
+    }
+
+    public boolean isSymmetric(TreeNode root) {
+        //打印本树
+        ArrayList<Integer> own = levelOrderSub(root);
+        System.out.println(own.toString());
+        //获取镜像
+        TreeNode mirrorNode = mirrorTreeV3(root);
+        //打印镜像
+        ArrayList<Integer> mirror = levelOrderSub(mirrorNode);
+        System.out.println(mirror.toString());
+        //比较两个打印列表
+        return mirror.equals(own);
     }
 
 }

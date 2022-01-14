@@ -132,6 +132,24 @@ public class TreeTest {
 
     }
 
+    {
+        TreeNode A = new TreeNode(4);TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(7); TreeNode node4 = new TreeNode(1);
+        TreeNode node5 = new TreeNode(3); TreeNode node6 = new TreeNode(6);
+        TreeNode node7 = new TreeNode(9);
+        A.left = node2; A.right = node3;
+        node2.left = node4; node2.right = node5;
+        node3.left = node6; node3.right = node7;
+        node4.left = null; node4.right = null;
+        node5.left = null; node5.right = null;
+        node6.left = null; node6.right = null;
+        node7.left = null; node7.right = null;
+    }
+    {
+        TreeNode A = new TreeNode(1);TreeNode node2 = new TreeNode(2);
+        A.left = node2; A.right = null;
+    }
+
     public void mirrorTreeTest() {
         TreeNode A = new TreeNode(4);TreeNode node2 = new TreeNode(2);
         TreeNode node3 = new TreeNode(7); TreeNode node4 = new TreeNode(1);
@@ -154,9 +172,28 @@ public class TreeTest {
 
     public void printTree(TreeNode root) {
         if (root == null) return;
-        System.out.println("root: "+root.val+" left: " + root.left.val + " right: " + root.right.val);
+        System.out.println("root: "+root.val+" left: " + root.left + " right: " + root.right);
         printTree(root.left);
         printTree(root.right);
+    }
+
+    public void isSymmetricTest() {
+        TreeNode A = new TreeNode(4);TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(7); TreeNode node4 = new TreeNode(1);
+        TreeNode node5 = new TreeNode(3); TreeNode node6 = new TreeNode(6);
+        TreeNode node7 = new TreeNode(9);
+        A.left = node2; A.right = node3;
+        node2.left = node4; node2.right = node5;
+        node3.left = node6; node3.right = node7;
+        node4.left = null; node4.right = null;
+        node5.left = null; node5.right = null;
+        node6.left = null; node6.right = null;
+        node7.left = null; node7.right = null;
+
+        TreeSolution treeSolution = new TreeSolution();
+        Boolean flag = false;
+        TreeNode res = treeSolution.isSymmetricV2(flag, A);
+        System.out.println(flag);
     }
 
 
@@ -167,6 +204,7 @@ public class TreeTest {
 //        levelOrder2Test();
 //        levelOrder3Test();
 //        isSubStructureTest();
-        treeTest.mirrorTreeTest();
+//        treeTest.mirrorTreeTest();
+        treeTest.isSymmetricTest();
     }
 }
