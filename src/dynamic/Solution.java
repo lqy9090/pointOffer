@@ -1,5 +1,7 @@
 package dynamic;
 
+import java.util.Arrays;
+
 public class Solution {
 
     public int fib(int n) { //50就扛不住了
@@ -36,5 +38,20 @@ public class Solution {
             b = sum;
         }
         return a;
+    }
+
+    public int maxProfit(int[] prices) {
+        int[] profit = {0, 0};
+
+        for (int i=0;i<prices.length;i++) {
+            int cost = -prices[i];
+            int profitTemp = prices[i] + profit[0];
+            System.out.print("cost: " + cost + " profitTemp: " + profitTemp+" profitArray1: " + Arrays.toString(profit));
+            if (i==0 || profit[0] < cost) profit[0] = cost;
+            else if (profit[0] <= 0 && profit[1] < profitTemp) profit[1] = profitTemp;
+            System.out.println(" profitArray2: " + Arrays.toString(profit));
+        }
+
+        return profit[1];
     }
 }

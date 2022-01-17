@@ -18,9 +18,17 @@ public class Test {
         }
     }
 
+    public void maxProfitTest() {
+        Solution solution = new Solution();
+        int[] prices = {7,6,4,3,1};
+        int maxProfit = solution.maxProfit(prices);
+        System.out.println(maxProfit);
+    }
+
     public static void main(String[] args) {
         Test test = new Test();
 //        test.fibTest();
-        test.numWaysTest();
+//        test.numWaysTest();
+        test.maxProfitTest();
     }
 }
